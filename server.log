@@ -1,0 +1,11 @@
+
+🚀 Server running at http://localhost:3000
+
+📋 Test pages:
+   - Basic demo: http://localhost:3000/test.html
+   - Test harness: http://localhost:3000/test-harness.html
+
+✅ API endpoint: http://localhost:3000/api/get-response
+
+Press Ctrl+C to stop the server
+

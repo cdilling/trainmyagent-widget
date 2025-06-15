@@ -56,72 +56,34 @@
       background: #00ff00;
       border: none;
       border-radius: 50%;
-      width: 45px;
-      height: 45px;
+      width: 40px;
+      height: 40px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.3s ease;
       flex-shrink: 0;
-      position: relative;
-      overflow: hidden;
     }
 
     .agent-widget-submit:hover {
       background: #00dd00;
-      transform: scale(1.05);
+      transform: scale(1.1);
     }
 
     .agent-widget-submit:active {
       transform: scale(0.95);
     }
 
-    .agent-widget-submit.loading {
-      pointer-events: none;
-      animation: pulse 1s infinite;
-    }
-
     .agent-widget-submit svg {
       width: 20px;
       height: 20px;
-      transition: opacity 0.2s ease;
-    }
-
-    .agent-widget-submit svg path {
-      stroke: #000000;
-      stroke-width: 2.5;
-      fill: none;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    @keyframes pulse {
-      0% {
-        transform: scale(1);
-        opacity: 1;
-      }
-      50% {
-        transform: scale(1.05);
-        opacity: 0.8;
-      }
-      100% {
-        transform: scale(1);
-        opacity: 1;
-      }
+      fill: #1a1a1a;
     }
 
     .agent-widget-loading {
       display: none;
       animation: spin 1s linear infinite;
-    }
-
-    .agent-widget-submit.loading .agent-widget-arrow {
-      display: none;
-    }
-
-    .agent-widget-submit.loading .agent-widget-loading {
-      display: block;
     }
 
     @keyframes spin {
@@ -263,13 +225,13 @@
       }
 
       .agent-widget-submit {
-        width: 40px;
-        height: 40px;
+        width: 36px;
+        height: 36px;
       }
 
       .agent-widget-submit svg {
-        width: 20px;
-        height: 20px;
+        width: 18px;
+        height: 18px;
       }
     }
   `;
@@ -302,9 +264,9 @@
           <input type="text" class="agent-widget-input" placeholder="I need an agent to..." />
           <button class="agent-widget-submit">
             <svg class="agent-widget-arrow" viewBox="0 0 24 24">
-              <path d="M7 12h10m0 0l-4-4m4 4l-4 4"/>
+              <path d="M5 12h14m-7-7l7 7-7 7"/>
             </svg>
-            <svg class="agent-widget-loading" viewBox="0 0 24 24">
+            <svg class="agent-widget-loading" viewBox="0 0 24 24" style="display: none;">
               <path d="M12 2v4m0 12v4m4.22-15.22l2.83 2.83M4.93 19.07l2.83-2.83M2 12h4m12 0h4m-15.22 4.22l2.83-2.83M19.07 4.93l-2.83 2.83"/>
             </svg>
           </button>
@@ -356,8 +318,9 @@
       const value = input.value.trim();
       if (!value) return;
 
-      // Add loading class for immediate feedback
-      submitBtn.classList.add('loading');
+      // Show loading state
+      document.querySelector('.agent-widget-arrow').style.display = 'none';
+      document.querySelector('.agent-widget-loading').style.display = 'block';
 
       try {
         // Call API
@@ -385,7 +348,8 @@
         modal.classList.add('active');
       } finally {
         // Reset loading state
-        submitBtn.classList.remove('loading');
+        document.querySelector('.agent-widget-arrow').style.display = 'block';
+        document.querySelector('.agent-widget-loading').style.display = 'none';
         input.value = '';
       }
     };
